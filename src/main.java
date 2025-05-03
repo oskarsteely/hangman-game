@@ -8,7 +8,53 @@ import java.util.Random;
 
 public class main {
     public static void main(String[] args) {
-        Random rand = new Random();
+        Game game = new Game();
+        Settings settings = new Settings();
+        Scanner input = new Scanner(System.in);
+        boolean exit = false;
+
+        while(!exit) {
+            System.out.println("-- Hangman game --");
+            System.out.println("1 - Start game.");
+            System.out.println("2 - Settings.");
+            System.out.println("3 - Scoreboard.");
+            System.out.println("4 - Exit.");
+
+            try {
+                String choiceString = input.nextLine();
+                int choice = Integer.parseInt(choiceString);
+
+                switch(choice) {
+                    case 1:
+                        game.start();
+                        exit = true;
+                        break;
+                    case 2:
+                        settings.menu();
+                        break;
+                    case 3:
+                        //System.out("wip :)");
+                        //exit = true;
+                        break;
+                    case 4:
+                        System.out.println("Bye!");
+                        System.exit(0);
+                    default:
+                        System.out.println("Invalid number!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input!");
+            }
+        }
+
+
+
+
+
+
+
+
+        /*Random rand = new Random();
         Scanner input = new Scanner(System.in);
 
         String words_csv = "4000-most-common-english-words.csv";
@@ -90,6 +136,6 @@ public class main {
                 System.out.println("You lost!");
                 System.out.println("The word was: " + word);
             }
-        }
+        }*/
     }
 }
