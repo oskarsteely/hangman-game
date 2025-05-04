@@ -11,6 +11,7 @@ public class Settings {
     private int difficulty_max;
     private String difficulty_name;
     private String playerNickname;
+    private int lives;
 
     public Settings() {
         input = new Scanner(System.in);
@@ -20,10 +21,15 @@ public class Settings {
         difficulty_max = 5;
         difficulty_name = "Normal";
         playerNickname = "Player 1";
+        lives = 6;
     }
 
     public void apply() {
         words = new Words(filePath, difficulty_min, difficulty_max);
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     public void menu() {
@@ -125,18 +131,21 @@ public class Settings {
                         difficulty_min = 0;
                         difficulty_max = 3;
                         difficulty_name = "Easy";
+                        lives = 10;
                         exit = true;
                         break;
                     case 2:
                         difficulty_min = 0;
                         difficulty_max = 6;
                         difficulty_name = "Normal";
+                        lives = 6;
                         exit = true;
                         break;
                     case 3:
                         difficulty_min = 5;
                         difficulty_max = 30;
                         difficulty_name = "Hard";
+                        lives = 6;
                         exit = true;
                         break;
                     case 4:

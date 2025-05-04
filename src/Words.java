@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class Words {
-    private Settings settings = new Settings();
     private List<String> words;
     private Random rand;
 
