@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
@@ -6,9 +8,29 @@ public class Game {
     private String wordToGuess;
     private Scanner input;
     private int lives;
+    private List<String> usedLetters;
+    StringBuilder wordGuess;
 
     public Game() {
         input = new Scanner(System.in);
+        usedLetters = new ArrayList<>();
+        settings = new Settings();
+        words = new Words();
+    }
+
+    private void usedLettersUI() {
+        System.out.print("Used letters: ");
+        for (int i = 0; i < usedLetters.size(); i++) {
+            System.out.print(usedLetters.get(i) + ", ");
+        }
+    }
+
+    private void wordGuessUI() {
+        wordGuess = new StringBuilder(wordToGuess);
+        for (int i = 0; i < wordGuess.length(); i++) {
+            wordGuess.setCharAt(i, '_');
+        }
+        System.out.print("\n" + wordGuess.length() + " letter word: " + wordGuess);
     }
 
     public void start() {
@@ -16,18 +38,11 @@ public class Game {
         wordToGuess = words.getWord();
         lives = settings.getLives();
 
-        StringBuilder wordGuess = new StringBuilder(wordToGuess);
-        for (int i = 0; i < wordGuess.length(); i++) {
-            wordGuess.setCharAt(i, '_');
-        }
-
         while (lives > 0) {
-            System.out.print("Used letters: ");
-            for (int i = 0; i < usedLetters.size(); i++) {
-                System.out.print(usedLetters.get(i) + ", ");
-            }
-            System.out.print("\n" + wordGuess.length() + " letter word: " + wordGuess);
+            usedLettersUI();
+            wordGuessUI();
             System.out.println("\nLives: " + lives + " ");
+
             while (true) {
                 try {
                     System.out.print("Take a guess: ");
@@ -46,10 +61,10 @@ public class Game {
                     }
 
                     boolean CorrectLetter = false;
-                    for (int i = 0; i < word.length(); i++) {
-                        if (guess.charAt(0) == word.charAt(i)) {
+                    for (int i = 0; i < wordToGuess.length(); i++) {
+                        if (guess.charAt(0) == wordToGuess.charAt(i)) {
                             CorrectLetter = true;
-                            wordGuess.setCharAt(i, word.charAt(i));
+                            wordGuess.setCharAt(i, wordToGuess.charAt(i));
                         }
                     }
 
@@ -68,14 +83,14 @@ public class Game {
                     System.out.println("An error occurred: " + e.getMessage());
                 }
             }
-            if (wordGuess.toString().equals(word)) {
+            if (wordGuess.toString().equals(wordToGuess)) {
                 System.out.println("You won!");
-                System.out.println("The word was: " + word);
+                System.out.println("The word was: " + wordToGuess);
                 break;
             }
             if (lives == 0) {
                 System.out.println("You lost!");
-                System.out.println("The word was: " + word);
+                System.out.println("The word was: " + wordToGuess);
             }
 
         }
