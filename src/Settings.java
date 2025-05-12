@@ -15,6 +15,7 @@ public class Settings {
 
     public Settings() {
         input = new Scanner(System.in);
+        words = new Words();
         filePath = "4000-most-common-english-words.csv";
         category_name = "Everything";
         difficulty_min = 0;
@@ -25,7 +26,7 @@ public class Settings {
     }
 
     public void apply() {
-        words = new Words(filePath, difficulty_min, difficulty_max);
+        words.wordsLoader(filePath, difficulty_min, difficulty_max);
     }
 
     public int getLives() {

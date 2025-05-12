@@ -34,6 +34,7 @@ public class Game {
     }
 
     public void start() {
+        settings.apply();
         settings.playerNickname();
         wordToGuess = words.getWord();
         lives = settings.getLives();

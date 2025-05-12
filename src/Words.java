@@ -7,16 +7,16 @@ public class Words {
     private List<String> words;
     private Random rand;
 
-    public Words(String filePath, int difficulty_min, int difficulty_max) {
+    public Words() {
         words = new ArrayList<>();
         rand = new Random();
-        wordsLoader(filePath, difficulty_min, difficulty_max);
     }
 
-    private void wordsLoader(String filePath, int difficulty_min, int difficulty_max) {
+    public void wordsLoader(String filePath, int difficulty_min, int difficulty_max) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
+                words.add(line);
                 if (line.trim().length() < difficulty_max) {
                     if (line.trim().length() > difficulty_min) {
                         words.add(line);
@@ -31,6 +31,9 @@ public class Words {
     }
 
     public String getWord() {
+        if (words.isEmpty()) {
+            throw new IllegalStateException("Word list is empty. Please load words before starting the game.");
+        }
         return words.get(rand.nextInt(words.size()));
     }
 }
